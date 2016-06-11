@@ -9,9 +9,7 @@ ARGV << '-h' if ARGV.empty? # Show the help message if no command line arguments
 OptionParser.new do |opts|
   opts.on('-o', '--output-directory OUTPUT_DIRECTORY', 'The directory where downloaded images should be stored') do |v|
     options[:output_dir] = v
-    unless Dir.exists?(v)
-      Dir.mkdir(v)
-    end
+    Dir.mkdir(v) unless Dir.exist?(v)
   end
   opts.on('-k', '--twitter-consumer-key TWITTER_CONSUMER_KEY') do |v|
     options[:twitter_consumer_key] = v
@@ -28,9 +26,9 @@ OptionParser.new do |opts|
 end.parse!
 
 # Check that we've been provided with the required arguments
-%w{TWITTER_CONSUMER_KEY TWITTER_CONSUMER_SECRET TWITTER_ACCESS_TOKEN TWITTER_ACCESS_SECRET OUTPUT_DIR}.each do |key|
+%w(TWITTER_CONSUMER_KEY TWITTER_CONSUMER_SECRET TWITTER_ACCESS_TOKEN TWITTER_ACCESS_SECRET OUTPUT_DIR).each do |key|
   next unless options[key.downcase.to_sym].nil?
-  raise Exception, "You must set ENV[#{key}] or provide --#{key.downcase.gsub(/_/,'-')} #{key}" if ENV[key].nil?
+  raise Exception, "You must set ENV[#{key}] or provide --#{key.downcase.tr('_', '-')} #{key}" if ENV[key].nil?
 end
 
 Pinkbike::Pod::Downloader.run(options)

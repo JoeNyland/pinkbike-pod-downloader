@@ -27,6 +27,7 @@ EOF
   spec.add_development_dependency 'bundler', '~> 1.11'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rubocop', '~> 0.40'
 
   spec.add_dependency 'twitter', '~> 5.16'
 end
