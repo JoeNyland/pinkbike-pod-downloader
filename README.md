@@ -1,11 +1,14 @@
 # Pinkbike::Pod::Downloader
 
-Downloads the latest Pinkbike PODs to a directory.
+Downloads the latest [Pinkbike POD][pinkbike-pod]s to a directory.
 
 If you're a fan of Pinkbike's PODs (Photo Of the Day), then you might want to download them use them for your desktop
 background, for example.
 This gem downloads the most recent PODs to a directory of your choosing. You could even create a cron that periodically
 downloads new PODs!
+
+## What is a Pinkbike POD??
+See [here][what-is-pinkbike-pod]. Click [here][pinkbike-pod] to see some examples. 
 
 ## Installation
 
@@ -73,3 +76,5 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
 [twitter-api-keys-documentation]: https://dev.twitter.com/oauth/overview/application-owner-access-tokens
+[pinkbike-pod]: http://www.pinkbike.com/photo/podlist/
+[what-is-pinkbike-pod]: http://www.pinkbike.com/about/faq/#how-to-get-pod-vod
