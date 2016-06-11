@@ -24,12 +24,12 @@ module Pinkbike
 
           # Loop through each link
           tweet.urls.each do |url|
-            uri = url.expanded_url
+            uri = url.expanded_url.to_s
             # Skip the tweet if it doesn't contain a link to the POD
-            next unless uri =~ %r{pinkbike.com\/photo\/\w.+/}
+            next unless uri =~ %r{pinkbike.com\/photo\/\w+/}
 
             # Get the ID of the POD image in the link
-            pic_id = uri.to_s[%r{photo\/\d+}][/\d+/]
+            pic_id = uri[%r{photo\/\d+}][/\d+/]
             pic_url = "#{PINKBIKE_IMAGE_BASE_URL}/p0pb#{pic_id}/p5pb#{pic_id}.jpg"
             filename = "#{opts[:output_dir]}/#{pic_url[/\w+\.jpg$/]}"
 
