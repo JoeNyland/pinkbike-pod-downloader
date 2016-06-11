@@ -1,0 +1,8 @@
+---
+NestedIterators:
+  exclude:
+  - Pinkbike::Pod::Downloader#self.run
+TooManyStatements:
+  exclude:
+  - initialize
+  - Pinkbike::Pod::Downloader#self.run

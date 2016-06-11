@@ -17,27 +17,28 @@ module Pinkbike
           # Loop through each tweet and get the POD image
 
           # Skip if we've not got the right hashtags
-          next unless (tweet.hashtags.map { |h| h.text.downcase } & %w( pinkbikepod pod )).any?
+          next unless (tweet.hashtags.map { |hashtag| hashtag.text.downcase } & %w( pinkbikepod pod )).any?
 
           # Skip if there's no URLs in the tweet
           next unless tweet.urls?
 
           # Loop through each link
           tweet.urls.each do |url|
+            uri = url.expanded_url
             # Skip the tweet if it doesn't contain a link to the POD
-            next unless url.expanded_url =~ %r{pinkbike.com\/photo\/\w.+/}
+            next unless uri =~ %r{pinkbike.com\/photo\/\w.+/}
 
             # Get the ID of the POD image in the link
-            pic_id = url.expanded_url.to_s[%r{photo\/\d+}][/\d+/]
+            pic_id = uri.to_s[%r{photo\/\d+}][/\d+/]
             pic_url = "#{PINKBIKE_IMAGE_BASE_URL}/p0pb#{pic_id}/p5pb#{pic_id}.jpg"
-            filename = pic_url[/\w+\.jpg$/]
+            filename = "#{opts[:output_dir]}/#{pic_url[/\w+\.jpg$/]}"
 
             # Dump the image to a file in opts[:output_dir]
-            break if File.file? "#{opts[:output_dir]}/#{filename}" # Skip images that have already been downloaded
-            File.open("#{opts[:output_dir]}/#{filename}", 'wb') do |output_file|
+            break if File.file? filename # Skip images that have already been downloaded
+            File.open(filename, 'wb') do |output_file|
               open(pic_url, 'rb') do |picture_file|
                 output_file.write(picture_file.read)
-                puts "Downloaded #{opts[:output_dir]}/#{filename}"
+                puts "Downloaded #{filename}"
               end
             end
 
