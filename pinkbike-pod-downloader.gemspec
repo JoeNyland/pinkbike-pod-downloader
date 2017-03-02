@@ -16,7 +16,7 @@ background, for example.
 This gem downloads the most recent PODs to a directory of your choosing. You could even create a cron that periodically
 downloads new PODs!
 EOF
-  spec.homepage      = 'https://github.com/MasterRoot24/pinkbike-pod-downloader'
+  spec.homepage      = 'https://github.com/JoeNyland/pinkbike-pod-downloader'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
